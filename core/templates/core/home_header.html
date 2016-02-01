@@ -1,0 +1,9 @@
+<ul class="review-menu">
+  <li{% if active_menu == "global_map"%} class="active"{% endif %}>
+    <a href="{% url 'global_map'  %}">Global Map</a>
+  </li>
+  <li{% if active_menu == "tracks"%} class="active"{% endif %}>
+    <a href="{% url 'tracks'  %}">My Tracks</a>
+  </li>
+</ul>
+

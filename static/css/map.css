@@ -1,0 +1,14 @@
+html, body,  .row, .map { height: 100% }
+
+    .list-group{
+        height: 100%;
+    }
+
+    .container-fluid{
+        height: 600px;
+    }
+
+    .google-map-canvas {
+        width:100%;
+        height: 100%;
+    }

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    $(function() {
+      $("#new-account").submit(function () {
+        $("input[name=confirm_password]").val($("input[name=password]").val());
+      });
+    });
+  </script>
+{% endblock javascript %}
+
+{% block content %}
+
+  <div class="row cover">
+    <div class="col-md-7">
+      <h1>Upload your tracks here</h1>
+      <p class="lead"><strong>Fixedrec</strong> will help you to view your tracks on desktop</p>
+    </div>
+    <div class="col-md-5">
+      <h2>Sign up for Fixedrec</h2>
+      <form action="/signup/" method="post" id="new-account">
+        {% csrf_token %}
+        <div class="form-group">
+          <input class="form-control input-lg" type="text" placeholder="Username" name="username">
+        </div>
+        <div class="form-group">
+          <input class="form-control input-lg" type="password" placeholder="Password" name="password">
+          <input type="password" name="confirm_password" value="" style="display: none;">
+        </div>
+        <div class="form-group">
+          <input class="form-control input-lg" type="email" placeholder="Email" name="email">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-lg btn-block">Create a new account</button>
+        </div>
+      </form>      
+    </div>
+  </div>
+
+{% endblock content %}
+

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block extra_css %}
+    <link href="{% static 'css/map.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{%static 'js/map.js' %}" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZY5nutUGjjf4DLJPPoAXYaykJG7vt5cI&callback=initMap"async defer></script>
+{% endblock %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+    {% include 'core/home_header.html' with active_menu='messaging' %}
+    <h2>Messaging block is currently under construction</h2>
+{% else %}
+<h2>Sorry, you are not authenticated</h2>
+{% endif %}
+
+{% endblock content %}
