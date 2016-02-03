@@ -32,7 +32,7 @@ function create_request ($this){
           //Handle errors here
         }
 //        $("#loading").hide();
-        create_polyline(data);
+        initMap(data);
     });
 }
 
@@ -53,35 +53,70 @@ function create_polyline(data){
 }
 
 
-function initMap(coords) {
+function initMap(data) {
 
 
-   if (typeof coords === "undefined") {
-        var coords = [];
-        coords.push({56.85297: 53.2167709, 56.85298: 53.2167710});
-   }
 
-  var bounds = new google.maps.LatLngBounds();
-  for (var i = 0; i < coords.length; i++) {
-      var point = coords[i];
-      var latlng = new google.maps.LatLng(point.lat, point.lng);
-      bounds.extend(latlng);
-
-  }
-  var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    zoom: 3,
-    center: bounds.getCenter(),
-    mapTypeId: google.maps.MapTypeId.TERRAIN
-  });
-  var flightPath = new google.maps.Polyline({
-    path :coords,
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-  });
+    var myOptions = {
+        center: new google.maps.LatLng(45.4555729, 9.169236),
+        zoom: 13,
+        mapTypeId: google.maps.MapTypeId.ROADMAP};
 
 
-  flightPath.setMap(map);
-  map.fitBounds(bounds);
+    var coordinates = [];
+    var bounds = new google.maps.LatLngBounds();
+    var flightPath = new google.maps.Polyline()
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
+
+     if(typeof data != 'undefined'){
+
+        var points = data.points;
+        var points_length = points.length;
+
+
+        for (var i = 0; i < points_length; i++) {
+            var lat = parseFloat(points[i].lat);
+            var lng = parseFloat(points[i].lng);
+            var latlng = new google.maps.LatLng(lat, lng)
+            coordinates.push(latlng);
+            bounds.extend(latlng);
+
+
+        }
+
+
+        var start = coordinates[0];
+        var finish = coordinates[coordinates.length-1]
+        var marker = new google.maps.Marker({
+            position: start,
+            icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-stars_maps.png',
+            map: map,
+        });
+
+        var marker = new google.maps.Marker({
+            position: finish,
+            map: map,
+            icon: 'http://maps.google.com/mapfiles/kml/paddle/pink-stars_maps.png',
+        });
+
+        flightPath = new google.maps.Polyline({
+            path :coordinates,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
+            map.fitBounds(bounds);
+    }
+
+
+
+
 }
+
+
+
+

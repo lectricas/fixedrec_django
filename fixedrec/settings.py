@@ -9,15 +9,14 @@ import os
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from unipath import Path
+
 
 SECRET_KEY = '9_+6rxx_vx5kdi3)76=#us63af(=541=xdq2v&j#=yh(tu3r^q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-PROJECT_DIR = Path(__file__).parent
+ALLOWED_HOSTS = ['fixedrec.pythonanywhere.com']
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
